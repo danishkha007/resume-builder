@@ -1,0 +1,30 @@
+<header class="bg-white shadow-md px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+    <!-- Logo -->
+    <div class="text-2xl font-bold text-blue-600">
+        <a routerLink="/">ResumePro</a>
+    </div>
+
+    <div class="flex-1 flex justify-end items-center space-x-10">
+
+        <!-- Navigation Menu -->
+        <nav class="hidden md:flex space-x-6">
+            <a routerLink="/" class="text-gray-600 hover:text-blue-600">Home</a>
+            <a routerLink="/builder" class="text-gray-600 hover:text-blue-600">Builder</a>
+            <a routerLink="/templates" class="text-gray-600 hover:text-blue-600">Templates</a>
+        </nav>
+
+        <!-- Auth Buttons -->
+        <div class="space-x-3">
+            <button class="px-4 py-2 text-sm font-medium text-blue-600 border border-blue-600 rounded hover:bg-blue-50">
+                Login
+            </button>
+            <button class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded hover:bg-blue-700">
+                Sign Up
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="fixed top-50 left-0 w-full h-[2px] bg-white z-40">
+    <div id="scrollProgress" class="h-full bg-blue-600 w-0"></div>
+</div>
