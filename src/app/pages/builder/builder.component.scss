@@ -1,0 +1,25 @@
+[cdkDrag] {
+    border: 1px dashed #ccc;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: #f9f9f9;
+    cursor: move;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #resume-container,
+    #resume-container * {
+        visibility: visible;
+    }
+
+    #resume-container {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+    }
+}

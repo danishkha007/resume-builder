@@ -1,0 +1,54 @@
+<div class="max-w-2xl mx-auto p-6 space-y-6 bg-white shadow rounded" *ngIf="step <= schemaKeys.length">
+    <h2 class="text-xl font-bold mb-4">Step {{ step }} of {{ schemaKeys.length }}</h2>
+
+    <ng-container *ngIf="currentSectionKey">
+        <ng-container *ngIf="!schema[currentSectionKey].isRepeatable">
+            <form [formGroup]="getFormGroup(currentSectionKey)!">
+                <ng-container
+                    *ngTemplateOutlet="sectionTemplate; context: { fields: schema[currentSectionKey].fields, group: getFormGroup(currentSectionKey) }"></ng-container>
+            </form>
+        </ng-container>
+
+        <!-- Repeatable Sections -->
+        <ng-container *ngIf="schema[currentSectionKey].isRepeatable">
+            <form [formGroup]="form">
+                <div formArrayName="{{ currentSectionKey }}">
+                    <div *ngFor="let group of getFormArray(currentSectionKey).controls; let i = index"
+                        [formGroupName]="i" class="border p-4 rounded mb-4">
+                        <ng-container
+                            *ngTemplateOutlet="sectionTemplate; context: { fields: schema[currentSectionKey].fields, group: group }"></ng-container>
+                        <button type="button" (click)="removeItem(currentSectionKey, i)"
+                            class="text-red-500 text-sm mt-2">Remove</button>
+                    </div>
+                    <button type="button" (click)="addItem(currentSectionKey)"
+                        class="btn btn-sm bg-blue-500 text-white">Add More</button>
+                </div>
+            </form>
+        </ng-container>
+    </ng-container>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-between mt-6">
+        <button class="btn" (click)="prevStep()" [disabled]="step === 1">Back</button>
+        <button class="btn" *ngIf="step < schemaKeys.length" (click)="nextStep()">Next</button>
+        <button class="btn bg-green-500 text-white" *ngIf="step === schemaKeys.length" (click)="onSubmit()">Continue to
+            Preview</button>
+    </div>
+
+    <!-- Template for fields -->
+    <ng-template #sectionTemplate let-fields="fields" let-group="group">
+        <div *ngFor="let field of fields" class="mb-4">
+            <label class="block font-semibold mb-1">{{ field.label }}</label>
+            <ng-container [ngSwitch]="field.type">
+                <input *ngSwitchCase="'text'" class="w-full border p-2 rounded" [formControl]="group.get(field.key)"
+                    type="text" />
+                <input *ngSwitchCase="'email'" class="w-full border p-2 rounded" [formControl]="group.get(field.key)"
+                    type="email" />
+                <textarea *ngSwitchCase="'textarea'" class="w-full border p-2 rounded"
+                    [formControl]="group.get(field.key)"></textarea>
+                <input *ngSwitchCase="'url'" class="w-full border p-2 rounded" [formControl]="group.get(field.key)"
+                    type="url" />
+            </ng-container>
+        </div>
+    </ng-template>
+</div>
