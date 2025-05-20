@@ -33,6 +33,21 @@ export class BuilderComponent {
     // Add more templates later
   ];
 
+  resumeLayouts = [
+    [
+      { key: 'personal' },
+      { key: 'skills' },
+      { key: 'experience' },
+      { key: 'education' },
+    ],
+    [
+      { key: 'personal' },
+      { key: 'experience' },
+      { key: 'skills' },
+      { key: 'education' },
+    ]
+  ]
+
   onWizardComplete(data: any) {
     this.resumeData = data;
     console.log(this.resumeData);

@@ -1,42 +1,45 @@
-<div class="resume-print-container">
-    <h1>{{ formData.personal.firstName }} {{ formData.personal.lastName }}</h1>
+<div class="border rounded shadow-sm resume-print-container">
+    <section *ngFor="let section of resumeLayout">
+        <ng-container *ngTemplateOutlet="getSectionTemplate(section.key)">
+        </ng-container>
+    </section>
 
-    <!-- <div class="flex items-center space-x-4 text-sm text-gray-700">
-        <div><i class="fas fa-envelope mr-1 text-gray-500"></i>{{ formData.personal.email }}</div>
-        <div><i class="fas fa-phone mr-1 text-gray-500"></i>{{ formData.personal.phone }}</div>
-        <div><i class="fas fa-map-marker-alt mr-1 text-gray-500"></i>{{ formData.personal.location }}</div>
-        <div><i class="fab fa-linkedin mr-1 text-blue-700"></i><a href="{{formData.personal.linkedin}}"
+    <ng-template #personalSection>
+        <h1>{{ formData.personal.firstName }} {{ formData.personal.lastName }}</h1>
+        <!-- <div class="flex items-center space-x-4 text-sm text-gray-700">
+            <div><i class="fas fa-envelope mr-1 text-gray-500"></i>{{ formData.personal.email }}</div>
+            <div><i class="fas fa-phone mr-1 text-gray-500"></i>{{ formData.personal.phone }}</div>
+            <div><i class="fas fa-map-marker-alt mr-1 text-gray-500"></i>{{ formData.personal.location }}</div>
+            <div><i class="fab fa-linkedin mr-1 text-blue-700"></i><a href="{{formData.personal.linkedin}}"
                 target="_blank">Profile</a></div>
-    </div> -->
-
-    <div class="flex flex-wrap items-center justify-between text-sm text-gray-700 w-full">
-        <div>{{ formData.personal.email }}</div>
-        <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div>
-        <div>{{ formData.personal.phone }}</div>
-        <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div>
-        <div>{{ formData.personal.location }}</div>
-        <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div>
-        <div>
-            <a [href]="formData.personal.linkedin" target="_blank" class="">
-                LinkedIn
-            </a>
+            </div> -->
+        <div class="flex flex-wrap items-center justify-between text-sm text-gray-700 w-full">
+            <div>{{ formData.personal.email }}</div>
+            <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div>
+            <div>{{ formData.personal.phone }}</div>
+            <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div>
+            <div>{{ formData.personal.location }}</div>
+            <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div>
+            <div>
+                <a [href]="formData.personal.linkedin" target="_blank" class="">
+                    LinkedIn
+                </a>
+            </div>
         </div>
-    </div>
+        <!-- <hr /> -->
+        <h2>Summary</h2>
+        <p class="w-full text-justify">{{ formData.personal.summary }}</p>
+        <hr />
+    </ng-template>
 
 
-
-    <!-- <hr /> -->
-    <h2>Summary</h2>
-    <p class="w-full text-justify">{{ formData.personal.summary }}</p>
-    <hr />
-
-    <section>
+    <ng-template #educationSection>
         <h2>Education</h2>
         <div *ngFor="let education of formData.education">
             <div class="flex flex-wrap items-center justify-start w-full">
                 <p><strong>{{ education.degree }}</strong></p>
                 <div class="h-[15px] min-w-[1px] bg-gray-500 rounded-full mx-3"></div>
-                <p class="text-gray-500"><strong>{{ education.school }}</strong></p>
+                <p class="text-gray-500"><strong>{{ education.institute }}</strong></p>
                 <!-- <p *ngIf="education.branch" class="text-gray-500"><strong>{{ education.branch }}</strong></p> -->
                 <div class="h-[15px] min-w-[1px] bg-gray-500 rounded-full mx-3"></div>
                 <p>{{ education.year }}</p>
@@ -47,9 +50,9 @@
                 education.summary }}</p>
             <hr />
         </div>
-    </section>
+    </ng-template>
 
-    <section>
+    <ng-template #experienceSection>
         <h2>Experience</h2>
         <div *ngFor="let experience of formData.experience">
             <div class="flex flex-wrap items-center justify-start w-full">
@@ -63,12 +66,12 @@
             <p class="w-full text-justify"><strong>Summary:</strong> {{ experience.summary }}</p>
             <p class="w-full text-justify"><strong>Skills:</strong> {{ experience.skills }}</p>
         </div>
-    </section>
+    </ng-template>
 
     <hr />
 
-    <section>
+    <ng-template #skillsSection>
         <h2>Skills</h2>
         <p>{{ formData.skills.skillsList }}</p>
-    </section>
+    </ng-template>
 </div>

@@ -21,12 +21,11 @@ export const personalFields: FieldConfig[] = [
 ];
 
 export const educationFields: FieldConfig[] = [
-  { key: 'school', label: 'School', type: 'text' },
   { key: 'degree', label: 'Degree', type: 'text' },
-  { key: 'branch', label: 'Branch/Major', type: 'text' },
-  { key: 'year', label: 'Year', type: 'text' },
-  { key: 'skill', label: 'Skills (Acquired during Course)', type: 'text' },
-  { key: 'summary', label: 'Summary', type: 'text' },
+  { key: 'branch', label: 'Branch/Major Subjects', type: 'text' },
+  { key: 'institute', label: 'Institute Name', type: 'text' },
+  { key: 'startDate', label: 'From', type: 'text' },
+  { key: 'endDate', label: 'To', type: 'text' },
 ];
 
 export const experienceFields: FieldConfig[] = [
@@ -69,3 +68,10 @@ export const resumeFormSchema: ResumeFormSchema = {
     fields: skillsFields,
   },
 };
+
+export const resumeFormLayout = [
+  { key: 'personal' },
+  { key: 'skills' },
+  { key: 'experience' },
+  { key: 'education' },
+];

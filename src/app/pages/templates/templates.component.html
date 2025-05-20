@@ -2,8 +2,8 @@
     <div class="max-w-6xl mx-auto">
         <h1 class="text-3xl font-bold mb-8 text-center text-gray-800">Available Resume Templates</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <app-template-one></app-template-one>
-            <app-template-two></app-template-two>
+            <app-template-one [formData]="templateOneData" [resumeLayout]="resumeLayouts[0]"></app-template-one>
+            <app-template-two [formData]="templateTwoData" [resumeLayout]="resumeLayouts[1]"></app-template-two>
         </div>
     </div>
 </section>
