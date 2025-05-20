@@ -36,4 +36,4 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages         # target branch
-          folder: dist/resume-builder   # built app folder
+          folder: dist/resume-builder/browser   # built app folder
