@@ -24,7 +24,7 @@ jobs:
       - name: 🛠 Build Angular project
         run: |
           npm install -g @angular/cli
-          ng build --configuration production --base-href=/your-repo-name/
+          ng build --configuration production --base-href=/resume-builder/
 
       - name: 🚀 Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
