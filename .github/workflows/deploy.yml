@@ -29,6 +29,9 @@ jobs:
           npm install -g @angular/cli
           ng build --configuration production --base-href=/resume-builder/
 
+      - name: 📄 Generate 404.html fallback
+        run: cp dist/resume-builder/index.html dist/resume-builder/404.html
+
       - name: 🚀 Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
