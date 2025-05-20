@@ -27,7 +27,7 @@ jobs:
       - name: 🛠 Build Angular project
         run: |
           npm install -g @angular/cli
-          ng build --configuration production --base-href=/resume-builder/
+          ng build --configuration production --base-href="https://danishkha007.github.io/resume-builder/"
 
       - name: 📄 Generate 404.html fallback
         run: cp dist/resume-builder/browser/index.html dist/resume-builder/browser/404.html
