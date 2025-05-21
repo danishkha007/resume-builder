@@ -6,6 +6,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TemplateOneComponent } from '@/components/templates/template-one/template-one.component';
 import jsPDF from 'jspdf';
 import { ResumeWizardComponent } from '@/components/wizard/resume-wizard.component';
+import 'assets/js/Poppins.js';
+import 'assets/js/Poppins-bold.js';
+import 'assets/js/Poppins-ExtraBold-normal.js';
+// import 'jspdf-autotable';
 
 @Component({
   standalone: true,
@@ -103,38 +107,42 @@ export class BuilderComponent {
   onExport() {
     if (!this.resumeElement) return;
 
-    // const doc = new jsPDF({
-    //   unit: 'pt',
-    //   format: 'a4', // 595.28 x 841.89 points
-    // });
+    const doc = new jsPDF({
+      orientation: 'p',
+      unit: 'pt',
+      format: 'a4', // 595.28 x 841.89 points
+      // putOnlyUsedFonts: true,
+    });
+    console.log(doc.getFontList());
+    // doc.setFont('Poppins-ExtraBold');
 
-    // doc.html(this.resumeElement.nativeElement, {
-    //   callback: (doc) => {
-    //     doc.save('resume.pdf');
-    //   },
-    //   margin: [20, 20, 20, 20],  // slightly larger margin for cleaner output
-    //   autoPaging: 'text',
-    //   x: 0,
-    //   y: 0,
-    //   html2canvas: {
-    //     scale: 0.65,               // adjust scale if your content is larger than A4
-    //     width: 800,
-    //     useCORS: true,            // if using external images or fonts
-    //     scrollY: -window.scrollY,
-    //   },
-    //   windowWidth: 800,          // match to the CSS width of the resume container
-    // });
-    const printContent = this.resumeElement.nativeElement.innerHTML;
-    const WindowPrt = window.open('', '', 'width=800,height=900');
-    if (WindowPrt) {
-      WindowPrt.document.write(`${printContent}`);
-      WindowPrt.document.close();
-      WindowPrt.focus();
-      setTimeout(() => {
-        WindowPrt.print();
-        WindowPrt.close();
-      }, 500);
-    }
+    doc.html(this.resumeElement.nativeElement, {
+      callback: (doc) => {
+        doc.save('resume.pdf');
+      },
+      margin: [30, 30, 30, 30],  // slightly larger margin for cleaner output
+      autoPaging: 'text',
+      x: 0,
+      y: 0,
+      width: 600,
+      windowWidth: 900,          // match to the CSS width of the resume container
+      html2canvas: {
+        useCORS: true,            // if using external images or fonts
+        scrollY: -window.scrollY,
+      },
+    });
+
+    // const printContent = this.resumeElement.nativeElement.innerHTML;
+    // const WindowPrt = window.open('', '', 'width=800,height=900');
+    // if (WindowPrt) {
+    //   WindowPrt.document.write(`${printContent}`);
+    //   WindowPrt.document.close();
+    //   WindowPrt.focus();
+    //   setTimeout(() => {
+    //     WindowPrt.print();
+    //     WindowPrt.close();
+    //   }, 500);
+    // }
   }
   buildFormFromSchema(schema: any): FormGroup {
     const group: any = {};

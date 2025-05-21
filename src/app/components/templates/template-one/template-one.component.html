@@ -1,4 +1,4 @@
-<div class="border rounded shadow-sm resume-print-container">
+<div class="resume-print-container gap-1">
     <section *ngFor="let section of resumeLayout">
         <ng-container *ngTemplateOutlet="getSectionTemplate(section.key)">
         </ng-container>
@@ -15,61 +15,57 @@
             </div> -->
         <div class="flex flex-wrap items-center justify-between text-sm text-gray-700 w-full">
             <div>{{ formData.personal.email }}</div>
-            <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div>
+            <div class="text-gray-500 mx-3">|</div>
             <div>{{ formData.personal.phone }}</div>
-            <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div>
+            <div class="text-gray-500 mx-3">|</div>
             <div>{{ formData.personal.location }}</div>
-            <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div>
+            <div class="text-gray-500 mx-3">|</div>
+            <!-- <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div>
+            <div class="h-[10px] min-w-[1px] bg-gray-500 rounded-full"></div> -->
             <div>
                 <a [href]="formData.personal.linkedin" target="_blank" class="">
-                    LinkedIn
+                    LinkedIn Profile
                 </a>
             </div>
         </div>
         <!-- <hr /> -->
         <h2>Summary</h2>
         <p class="w-full text-justify">{{ formData.personal.summary }}</p>
-        <hr />
     </ng-template>
-
-
     <ng-template #educationSection>
         <h2>Education</h2>
         <div *ngFor="let education of formData.education">
             <div class="flex flex-wrap items-center justify-start w-full">
                 <p><strong>{{ education.degree }}</strong></p>
-                <div class="h-[15px] min-w-[1px] bg-gray-500 rounded-full mx-3"></div>
-                <p class="text-gray-500"><strong>{{ education.institute }}</strong></p>
+                <div class="text-gray-500 mx-3">|</div>
                 <!-- <p *ngIf="education.branch" class="text-gray-500"><strong>{{ education.branch }}</strong></p> -->
-                <div class="h-[15px] min-w-[1px] bg-gray-500 rounded-full mx-3"></div>
-                <p>{{ education.year }}</p>
+                <p class="text-gray-500" *ngIf="education.branch"><strong>{{ education.branch }}</strong></p>
+                <div *ngIf="education.branch" class="text-gray-500 mx-3">|</div>
+                <p>{{ education.startDate }} - {{ education.endDate }}</p>
             </div>
-            <p *ngIf="education.branch"><strong>Branch/Major:</strong> {{ education.branch }}</p>
-            <p *ngIf="education.skill"><strong>Skills:</strong> {{ education.skill }}</p>
-            <p *ngIf="education.summary" class="w-full text-justify"><strong>Summary:</strong> {{
-                education.summary }}</p>
+            <!-- <div class="flex flex-wrap items-center justify-start w-full"> -->
+            <p><strong>Institute:</strong> {{ education.institute }}</p>
+            <!-- <div *ngIf="education.location" class="text-gray-500 mx-3">|</div> -->
+            <p><strong>Location:</strong> {{ education.location }}</p>
+            <!-- </div> -->
             <hr />
         </div>
     </ng-template>
-
     <ng-template #experienceSection>
         <h2>Experience</h2>
         <div *ngFor="let experience of formData.experience">
             <div class="flex flex-wrap items-center justify-start w-full">
                 <p><strong>{{ experience.position }}</strong></p>
-                <div class="h-[15px] min-w-[1px] bg-gray-500 rounded-full mx-3"></div>
-                <p class="text-gray-500"><strong>{{ experience.company }}</strong></p>
+                <div class="text-gray-500 mx-3">|</div>
+                <p><strong>{{ experience.company }}</strong></p>
                 <!-- <p *ngIf="education.branch" class="text-gray-500"><strong>{{ education.branch }}</strong></p> -->
-                <div class="h-[15px] min-w-[1px] bg-gray-500 rounded-full mx-3"></div>
+                <div class="text-gray-500 mx-3">|</div>
                 <p>{{ experience.from }} - {{ experience.to ? experience.to : "Present" }}</p>
             </div>
             <p class="w-full text-justify"><strong>Summary:</strong> {{ experience.summary }}</p>
             <p class="w-full text-justify"><strong>Skills:</strong> {{ experience.skills }}</p>
         </div>
     </ng-template>
-
-    <hr />
-
     <ng-template #skillsSection>
         <h2>Skills</h2>
         <p>{{ formData.skills.skillsList }}</p>

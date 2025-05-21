@@ -16,13 +16,17 @@
             </button>
         </div>
 
-        <div #resume class="mb-4">
-            <app-template-one [formData]="resumeData" *ngIf="selectedTemplate === 'template-one'"></app-template-one>
-            <!-- Add more templates here -->
-            <!-- <app-resume-print [formData]="resumeData" *ngIf="selectedTemplate === 'template-two'"></app-resume-print> -->
+        <div class="border rounded shadow-sm" style="padding: 3rem;">
+            <div #resume>
+
+                <app-template-one [formData]="resumeData"
+                    *ngIf="selectedTemplate === 'template-one'"></app-template-one>
+                <!-- Add more templates here -->
+                <!-- <app-resume-print [formData]="resumeData" *ngIf="selectedTemplate === 'template-two'"></app-resume-print> -->
+            </div>
         </div>
 
-        <div class="space-x-2">
+        <div class="space-x-2 mt-2">
             <button class="bg-blue-500 text-white px-4 py-2 rounded" (click)="editDetails()">Edit Details</button>
             <button class="bg-green-500 text-white px-4 py-2 rounded" (click)="onExport()">Export PDF</button>
         </div>
