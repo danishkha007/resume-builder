@@ -15,7 +15,7 @@ export class ResumeWizardComponent {
   schema = resumeFormSchema;
   form: FormGroup;
   schemaKeys: string[] = Object.keys(resumeFormSchema);
-  step = 4;
+  step = 1;
 
   constructor(private fb: FormBuilder, private formBuilderService: FormBuilderService) {
     this.form = this.formBuilderService.createForm(this.schema);
