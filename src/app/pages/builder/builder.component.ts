@@ -6,36 +6,36 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TemplateOneComponent } from '@/components/templates/template-one/template-one.component';
 import jsPDF from 'jspdf';
 import { ResumeWizardComponent } from '@/components/wizard/resume-wizard.component';
-import 'assets/js/Poppins.js';
-import 'assets/js/Poppins-bold.js';
-import 'assets/js/Poppins-ExtraBold-normal.js';
-// import 'jspdf-autotable';
+import { builderTemplates } from '@/config/form-config';
+import html2pdf from 'html2pdf.js';
+import { TemplateTwoComponent } from '@/components/templates/template-two/template-two.component';
+import { demoResumeData } from '@/config/data';
+
 
 @Component({
   standalone: true,
   selector: 'app-builder',
   templateUrl: './builder.component.html',
   styleUrls: ['./builder.component.scss'],
-  imports: [CommonModule, DragDropModule, TemplateOneComponent, ResumeWizardComponent]
+  imports: [CommonModule, DragDropModule, TemplateOneComponent, TemplateTwoComponent, ResumeWizardComponent]
 })
 export class BuilderComponent {
   @ViewChild('resume') resumeElement!: ElementRef;
+  @ViewChild('previewFrame') previewFrame!: ElementRef;
+
+  demoData = demoResumeData;
 
   resumeForm: FormGroup;
   sections = ['Contact Info', 'Education', 'Experience', 'Skills'];
   previewUrl: string | null = null;
   previewVisible = false;
-  @ViewChild('previewFrame') previewFrame!: ElementRef;
-
   resumeData: any = null;      // will hold form data from wizard
   selectedTemplate = 'template-one';
 
+  // html2pdf = html2pdf;
+
   // You can define your templates list here
-  templates = [
-    { id: 'template-one', name: 'Template One' },
-    { id: 'template-two', name: 'Template Two' },
-    // Add more templates later
-  ];
+  templates = builderTemplates;
 
   resumeLayouts = [
     [
@@ -54,6 +54,7 @@ export class BuilderComponent {
 
   onWizardComplete(data: any) {
     this.resumeData = data;
+    this.onSave();
     console.log(this.resumeData);
     this.selectedTemplate = this.templates[0].id; // default template
   }
@@ -66,16 +67,16 @@ export class BuilderComponent {
     this.resumeData = null; // reset to show wizard again
   }
 
-  showPreview() {
-    if (!this.previewUrl) {
-      this.onExport(); // Generate PDF and set previewUrl if not already done
-    }
-    this.previewVisible = true;
-  }
+  // showPreview() {
+  //   if (!this.previewUrl) {
+  //     this.onExport(); // Generate PDF and set previewUrl if not already done
+  //   }
+  //   this.previewVisible = true;
+  // }
 
-  closePreview() {
-    this.previewVisible = false;
-  }
+  // closePreview() {
+  //   this.previewVisible = false;
+  // }
 
   constructor(private fb: FormBuilder) {
     this.resumeForm = this.fb.group({
@@ -106,31 +107,49 @@ export class BuilderComponent {
 
   onExport() {
     if (!this.resumeElement) return;
-
-    const doc = new jsPDF({
-      orientation: 'p',
-      unit: 'pt',
-      format: 'a4', // 595.28 x 841.89 points
-      // putOnlyUsedFonts: true,
-    });
-    console.log(doc.getFontList());
-    // doc.setFont('Poppins-ExtraBold');
-
-    doc.html(this.resumeElement.nativeElement, {
-      callback: (doc) => {
-        doc.save('resume.pdf');
-      },
-      margin: [30, 30, 30, 30],  // slightly larger margin for cleaner output
-      autoPaging: 'text',
-      x: 0,
-      y: 0,
-      width: 600,
-      windowWidth: 900,          // match to the CSS width of the resume container
+    const element = this.resumeElement.nativeElement;
+    const opt = {
+      margin: 0.5,
+      filename: 'resume.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
       html2canvas: {
-        useCORS: true,            // if using external images or fonts
-        scrollY: -window.scrollY,
+        scale: 2, // makes text sharper
+        useCORS: true, // necessary to load external fonts like Google Fonts
       },
-    });
+      jsPDF: {
+        unit: 'in',
+        format: 'a4',
+        orientation: 'portrait'
+      }
+    };
+
+    html2pdf().set(opt).from(element).save();
+
+    // const doc = new jsPDF({
+    //   orientation: 'p',
+    //   unit: 'pt',
+    //   format: 'a4', // 595.28 x 841.89 points
+    //   // putOnlyUsedFonts: true,
+    // });
+    // // console.log(doc.getFontList());
+    // // doc.setFont('Poppins-ExtraBold');
+
+    // doc.html(this.resumeElement.nativeElement, {
+    //   callback: (doc) => {
+    //     doc.save('resume.pdf');
+    //   },
+    //   margin: [30, 30, 30, 30],  // slightly larger margin for cleaner output
+    //   autoPaging: 'text',
+    //   x: 0,
+    //   y: 0,
+    //   width: 600,
+    //   windowWidth: 900,          // match to the CSS width of the resume container
+    //   html2canvas: {
+    //     async: true,
+    //     useCORS: true,            // if using external images or fonts
+    //     scrollY: -window.scrollY,
+    //   },
+    // });
 
     // const printContent = this.resumeElement.nativeElement.innerHTML;
     // const WindowPrt = window.open('', '', 'width=800,height=900');

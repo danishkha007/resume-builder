@@ -2,6 +2,7 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { register } from 'swiper/element/bundle';
 
 
 bootstrapApplication(AppComponent, appConfig)
@@ -14,3 +15,5 @@ window.addEventListener("scroll", () => {
   const bar = document.getElementById("scrollProgress");
   if (bar) bar.style.width = `${scrolled}%`;
 });
+
+register();

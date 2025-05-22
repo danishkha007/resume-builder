@@ -18,11 +18,10 @@
 
         <div class="border rounded shadow-sm" style="padding: 3rem;">
             <div #resume>
-
-                <app-template-one [formData]="resumeData"
-                    *ngIf="selectedTemplate === 'template-one'"></app-template-one>
-                <!-- Add more templates here -->
-                <!-- <app-resume-print [formData]="resumeData" *ngIf="selectedTemplate === 'template-two'"></app-resume-print> -->
+                <app-template-one [formData]="resumeData" *ngIf="selectedTemplate === 'template-one'"
+                    [resumeLayout]="resumeLayouts[0]"></app-template-one>
+                <app-template-two [formData]="demoData" *ngIf="selectedTemplate === 'template-two'"
+                    [resumeLayout]="resumeLayouts[1]"></app-template-two>
             </div>
         </div>
 

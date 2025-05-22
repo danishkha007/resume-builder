@@ -75,3 +75,9 @@ export const resumeFormLayout = [
   { key: 'experience' },
   { key: 'education' },
 ];
+
+export const builderTemplates = [
+  { id: 'template-one', name: 'Template One' },
+  { id: 'template-two', name: 'Template Two' },
+  // Add more templates later
+];

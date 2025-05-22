@@ -17,6 +17,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "allowedCommonJsDependencies": [
+              "swiper"
+            ],
             "outputPath": "dist/resume-builder",
             "index": "src/index.html",
             "browser": "src/main.ts",
@@ -32,8 +35,9 @@
               }
             ],
             "styles": [
+              "src/styles.scss",
               "@angular/material/prebuilt-themes/azure-blue.css",
-              "src/styles.scss"
+              "node_modules/swiper/swiper-bundle.min.css"
             ],
             "scripts": []
           },

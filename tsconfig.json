@@ -22,7 +22,10 @@
       "@/*": [
         "app/*"
       ]
-    }
+    },
+    "types": [
+      "swiper"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
