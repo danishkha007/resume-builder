@@ -1,47 +1,54 @@
-<!-- <section class="py-12 px-6 bg-gray-50 min-h-screen">
-    <div class="max-w-6xl mx-auto">
-        <h1 class="text-3xl font-bold mb-8 text-center text-gray-800">Available Resume Templates</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <app-template-one [formData]="templateOneData" [resumeLayout]="resumeLayouts[0]"></app-template-one>
-            <app-template-two [formData]="templateTwoData" [resumeLayout]="resumeLayouts[1]"></app-template-two>
-        </div>
-    </div>
-</section> -->
-
 <section class="py-12 px-6 bg-gray-50 min-h-screen">
-    <div class="max-w-6xl mx-auto">
+    <div class="mx-auto">
         <h1 class="text-3xl font-bold mb-8 text-center text-gray-800">Available Resume Templates</h1>
 
-        <!-- <swiper [slidesPerView]="1" [spaceBetween]="30" [loop]="true" class="w-full h-[80vh]">
-
-            <ng-template swiperSlide>
-                <div class="h-full w-full flex justify-center items-center">
-                    <app-template-one [formData]="templateOneData" [resumeLayout]="resumeLayouts[0]"
-                        class="w-[794px] h-full bg-white shadow-md">
-                    </app-template-one>
-                </div>
-            </ng-template>
-
-            <ng-template swiperSlide>
-                <div class="h-full w-full flex justify-center items-center">
-                    <app-template-two [formData]="templateTwoData" [resumeLayout]="resumeLayouts[1]"
-                        class="w-[794px] h-full bg-white shadow-md">
-                    </app-template-two>
-                </div>
-            </ng-template>
-
-        </swiper> -->
-        <swiper-container slides-per-view="1" navigation="true" pagination="true" style="width: 100%;">
-            <swiper-slide>
-                <div class="border rounded shadow-sm bg-white" style="padding: 32px; max-width: 800px;margin:auto">
+        <h1 class="text-center text-2xl font-semibold mb-6 text-gray-700">{{ currentTitle }}</h1>
+        <swiper-container #swiperRef loop="true" effect="coverflow" grab-cursor="true" centered-slides="true"
+            slides-per-view="auto" pagination="true" navigation="true" style="width: 100%;"
+            coverflow-effect='{ "rotate": 0, "stretch": -100, "depth": 100, "modifier": 1, "slideShadows": false, "scale": 1 }'
+            (slidechange)="this.onSlideChange($event)" (navigationnext)="this.onSlideChange($event)">
+            <swiper-slide style="max-width: fit-content;">
+                <div class="border rounded shadow-sm bg-white" style="padding: 32px; max-width: 800px;">
                     <app-template-one [formData]="templateOneData" [resumeLayout]="resumeLayouts[0]"></app-template-one>
                 </div>
             </swiper-slide>
-            <swiper-slide>
-                <div class="border rounded shadow-sm bg-white" style="padding: 32px; max-width: 800px;margin:auto">
-                    <app-template-two [formData]="templateTwoData" [resumeLayout]="resumeLayouts[1]"></app-template-two>
+            <swiper-slide style="width: 800px;">
+                <div class="border rounded shadow-sm bg-white" style="padding: 32px; margin:auto">
+                    <app-template-two [formData]="templateOneData" [resumeLayout]="resumeLayouts[1]"></app-template-two>
                 </div>
             </swiper-slide>
+            <swiper-slide style="width: 800px;">
+                <div class="border rounded shadow-sm bg-white" style="padding: 32px; max-width: 800px;margin:auto">
+                    <app-template-two [formData]="templateOneData" [resumeLayout]="resumeLayouts[1]"></app-template-two>
+                </div>
+            </swiper-slide>
+            <swiper-slide style="width: 800px;">
+                <div class="border rounded shadow-sm bg-white" style="padding: 32px; max-width: 800px;margin:auto">
+                    <app-template-two [formData]="templateOneData" [resumeLayout]="resumeLayouts[1]"></app-template-two>
+                </div>
+            </swiper-slide>
+            <swiper-slide style="width: 800px;">
+                <div class="border rounded shadow-sm bg-white" style="padding: 32px; max-width: 800px;margin:auto">
+                    <app-template-two [formData]="templateOneData" [resumeLayout]="resumeLayouts[1]"></app-template-two>
+                </div>
+            </swiper-slide>
+            <swiper-slide style="width: 800px;">
+                <div class="border rounded shadow-sm bg-white" style="padding: 32px; max-width: 800px;margin:auto">
+                    <app-template-two [formData]="templateOneData" [resumeLayout]="resumeLayouts[1]"></app-template-two>
+                </div>
+            </swiper-slide>
+            <swiper-slide style="width: 800px;">
+                <div class="border rounded shadow-sm bg-white" style="padding: 32px; max-width: 800px;margin:auto">
+                    <app-template-two [formData]="templateOneData" [resumeLayout]="resumeLayouts[1]"></app-template-two>
+                </div>
+            </swiper-slide>
+            <swiper-slide style="width: 800px;">
+                <div class="border rounded shadow-sm bg-white" style="padding: 32px; max-width: 800px;margin:auto">
+                    <app-template-two [formData]="templateOneData" [resumeLayout]="resumeLayouts[1]"></app-template-two>
+                </div>
+            </swiper-slide>
+            <!-- Add more <swiper-slide> if needed -->
         </swiper-container>
+
     </div>
 </section>

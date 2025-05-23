@@ -79,5 +79,4 @@ export const resumeFormLayout = [
 export const builderTemplates = [
   { id: 'template-one', name: 'Template One' },
   { id: 'template-two', name: 'Template Two' },
-  // Add more templates later
 ];
